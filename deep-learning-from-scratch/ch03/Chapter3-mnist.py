@@ -1,3 +1,5 @@
+import sys
+sys.path.append("/Users/onmywave/Desktop/Github/DeepLearning/deep-learning-from-scratch/")
 from dataset.mnist import load_mnist
 import numpy as np
 from PIL import Image
