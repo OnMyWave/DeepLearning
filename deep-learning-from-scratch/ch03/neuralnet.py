@@ -1,4 +1,4 @@
-from summary import forward
+from summary import forward, init_network
 from dataset.mnist import load_mnist
 import numpy as np
 
