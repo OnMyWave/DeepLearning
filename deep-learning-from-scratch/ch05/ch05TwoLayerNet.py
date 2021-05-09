@@ -21,7 +21,7 @@ class TwoLayerNet:
 
     def predict(self,x):
         for layer in self.layers.values():
-            x = layer.foward(x)
+            x = layer.forward(x)
         return x
     
     def loss(self,x,t):
