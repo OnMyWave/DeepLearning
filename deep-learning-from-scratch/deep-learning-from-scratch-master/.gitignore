@@ -1,5 +1,5 @@
-.DS_Store
 *~
 *.gz
 *.pyc
+*.DS_Store
 __pycache__/
