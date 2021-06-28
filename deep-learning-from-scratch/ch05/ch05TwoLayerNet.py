@@ -9,7 +9,7 @@ class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std = 0.01):
         self.params = {}
         self.params['W1'] = weight_init_std * np.random.rand(input_size,hidden_size)
-        self.params['W2'] = weight_init_std * np.random.rand(input_size,hidden_size)
+        self.params['W2'] = weight_init_std * np.random.rand(hidden_size,output_size)
         self.params['b1'] = np.zeros(hidden_size)
         self.params['b2'] = np.zeros(output_size)
         
@@ -42,8 +42,8 @@ class TwoLayerNet:
         grads = {}
         grads['W1'] = numerical_gradient(loss_W,self.params['W1'])
         grads['W2'] = numerical_gradient(loss_W,self.params['W2'])
-        grads['b1'] = numerical_gradient(loss_w,self.params['b1'])
-        grads['b2'] = numerical_gradient(loss_w,self.params['b2'])
+        grads['b1'] = numerical_gradient(loss_W,self.params['b1'])
+        grads['b2'] = numerical_gradient(loss_W,self.params['b2'])
 
         return grads
 

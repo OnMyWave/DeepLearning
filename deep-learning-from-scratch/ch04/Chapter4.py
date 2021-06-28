@@ -1,5 +1,8 @@
 # Chapter4. 
 import numpy as np
+import sys
+sys.path.append("/Users/onmywave/Desktop/Github/DeepLearning/deep-learning-from-scratch/")
+from dataset.mnist import load_mnist
 
 # 평균 제곱 오차 : mean-squared-error
 y = [0.1, 0.05, 0.6, 0.0, 0.05, 0.1, 0.0, 0.1, 0.0,0.0]
@@ -18,10 +21,6 @@ def cross_entropy_error(y,t):
 
 print(cross_entropy_error(np.array(y),np.array(t)))
 
-import sys, os
-sys.path.append(os.pardir)
-from dataset.mnist import load_mnist
-
 (x_train, t_train ), (x_test, t_test) = load_mnist(normalize=True,flatten=True, one_hot_label=True)
 
 train_size = x_train.shape[0]
@@ -32,4 +31,4 @@ t_batch = t_train[batch_mask]
 
 def batch_cross_entropy(y,t):
     delta = 1e-7
-    return -np.sum(t*np.log(y+delta))/n
+    return -np.sum(t*np.log(y+delta))/len(t)

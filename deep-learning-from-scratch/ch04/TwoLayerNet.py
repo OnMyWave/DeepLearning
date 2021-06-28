@@ -9,16 +9,16 @@ class TwoLayerNet:
         self.params = {}
         self.params['W1'] = weight_init_std * np.random.randn(input_size,hidden_size)
         self.params['b1'] = np.zeros(hidden_size)
-        self.params['W2'] = weight_init_std * np.random.randn(input_size,hidden_size)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size)
         self.params['b2'] = np.zeros(output_size)
 
     def predict(self,x):
         W1,W2 = self.params['W1'],self.params['W2']
         b1,b2 = self.params['b1'],self.params['b2']
     
-        a1 = np.dot(x,W1) +b1
+        a1 = np.dot(x,W1) + b1
         z1 = sigmoid(a1)
-        a2 = np.dot(z1,W2) +b2
+        a2 = np.dot(z1,W2) + b2
         y = softmax(a2)
 
         return y
@@ -41,8 +41,8 @@ class TwoLayerNet:
         grads = {}
         grads['W1'] = numerical_gradient(loss_W,self.params['W1'])
         grads['W2'] = numerical_gradient(loss_W,self.params['W2'])
-        grads['b1'] = numerical_gradient(loss_w,self.params['b1'])
-        grads['b2'] = numerical_gradient(loss_w,self.params['b2'])
+        grads['b1'] = numerical_gradient(loss_W,self.params['b1'])
+        grads['b2'] = numerical_gradient(loss_W,self.params['b2'])
 
         return grads
         
@@ -51,3 +51,7 @@ net = TwoLayerNet(input_size = 784, hidden_size = 100, output_size = 10)
 
 x = np.random.rand(100,784)
 y = net.predict(x)
+
+# 미니배치 학습 구현하기
+
+    

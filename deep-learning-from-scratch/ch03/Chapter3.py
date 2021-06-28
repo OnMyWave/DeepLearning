@@ -13,7 +13,7 @@ def step_function(x):
 
 def step_function2(x):
     y = x > 0 
-    return y.astype(np.int)
+    return y.astype(int)
 
 x = np.arange(-5.0,5.0,0.1)
 y = step_function2(x)
@@ -49,28 +49,14 @@ def softmax(x):
     return exp_x/np.sum(np.exp(x - max_num))
     # np.max는 최대값 반환
 
-# 3.4 3층 신경망 구현하기
-
-X = np.array([1.0,0.5])
-W = np.array([[0.3,0.5],[0.25,0.3],[0.1,0.5],[0.4,0.1],[0.2,0.5]])
-dot_WX = np.dot(W,X)
-z = sigmoid(dot_WX)
-
-print(W)
-print(dot_WX)
-print(z)
-print()
-print()
-print()
-
-# 구현 정리
+# 3층 신경망 구현 정리
 
 def init_network():
     network = {}
     network['w1'] = np.array([[0.3,0.5],[0.25,0.3],[0.1,0.5],[0.4,0.1],[0.2,0.5]])
     network['w2'] = np.array([[0.4,0.1,0.2,0.4,0.5],[0.3,0.7,0.4,0.9,0.1]])
-    network['b1'] = np.array([0.1,0.1,0.1,0.2,0.3])
-    network['b2'] = np.array([0.2,0.1])
+    network['b1'] = np.array([0.2,0.3])
+    network['b2'] = np.array([0.1,0.1,0.1,0.2,0.3])
     
     return network
 
@@ -79,15 +65,15 @@ print()
 
 
 def forward(network,x):
-    y1 = np.dot(network['w1'],x) + network['b1']
+    y1 = np.dot(x,network['w1']) + network['b1']
     z1 = sigmoid(y1)
-    y2 = np.dot(network['w2'],z1) + network['b2']
+    y2 = np.dot(z1,network['w2']) + network['b2']
     z2 = sigmoid(y2)
     z = indentity_function(z2)
     return z
 
 network = init_network()
 
-X = np.array([0.3,0.5])
+X = np.array([0.3,0.5,0.3,0.4,0.7])
 print(forward(network,X))
 print(softmax(X))
